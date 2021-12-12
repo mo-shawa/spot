@@ -1,2 +1,11 @@
 {% extends 'base.html' %}
-im gay
+{% block content %}
+
+
+{{ user.first_name}}
+{% for dog in user.profile.dog_set.all %}
+<h1>{{ dog.name }} </h1>
+{% endfor %}
+{{ user.profile.bio }}
+
+{% endblock %}
