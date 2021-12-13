@@ -82,7 +82,9 @@ class DogCreate(LoginRequiredMixin,CreateView):
 
 def profile_photo(request, user_id):
   photo_file = request.FILES.get("photo-file", None)
+  print("photofunc")
   if photo_file:
+        print("photofile")
         s3 = boto3.client('s3')
         # need a unique "key" for S3 / needs image file extension too
         key = uuid.uuid4().hex[:6] + photo_file.name[photo_file.name.rfind('.'):]
@@ -91,8 +93,15 @@ def profile_photo(request, user_id):
             s3.upload_fileobj(photo_file, BUCKET, key)
             # build the full url string
             url = f"{S3_BASE_URL}{BUCKET}/{key}"
+            
+            profile = Profile.objects.get(user=user_id)
+            profile_id = profile.id
+            profile.image = url
+            profile.save()
+            print(profile)
+            
             # we can assign to cat_id or cat (if you have a cat object)
-            photo = Photo(url=url, user_id=user_id)
+            photo = Photo(url=url, profile=profile_id)
             photo.save()
         except:
             print('An error occurred uploading file to S3')

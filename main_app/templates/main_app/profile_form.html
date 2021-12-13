@@ -5,6 +5,12 @@
     <h1>Update Profile</h1>
  
   <!-- Leaving the action empty makes the form post to the same url used to display it -->
+  <form action="{% url 'profile_photo' user.id %}" enctype="multipart/form-data" method="POST" class="card-panel">
+    {% csrf_token %}
+    <input type="file" name="photo-file">
+    <br>
+    <input type="submit" class="btn" value="Upload Photo">
+</form>
   <form action="{% url 'profile_update' user.id %}" method="post">
     <!-- Django requires the following for security purposes -->
     {% csrf_token %}
@@ -12,6 +18,8 @@
       <!-- Render the inputs inside of <tr>s & <td>s -->
       <!-- {{ form.as_table }} -->
       {{ profile_form.as_table}}
+
+      
     </table>
     <button type="submit"  class="btn"> Submit! </button>
   </form>

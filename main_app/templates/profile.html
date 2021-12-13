@@ -3,10 +3,17 @@
   class="d-flex flex-column justify-content-start align-items-center py-3"
   style="min-height: 100vh"
 >
+{% if user.profile.image %}
+<img
+    src="{{ user.profile.image }}"
+    class="rounded-circle mw-100 py-3 my-3"
+  />
+{% else}
   <img
     src="https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png"
     class="rounded-circle mw-100 py-3 my-3"
   />
+  {% endif %}
   <h1 class="my-3">{{user.get_full_name}}</h1>
   <div class="d-flex justify-content-around">
     <a href="/dogs/create/">
