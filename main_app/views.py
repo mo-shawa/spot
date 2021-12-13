@@ -42,10 +42,22 @@ class ProfileCreate(LoginRequiredMixin, CreateView):
   fields = "__all__"
 
 def profile_update(request, user_id):
-  profile_form = ProfileForm() 
-  context= {"profile_form": profile_form}
-  return render(request, 'main_app/profile_form.html', context)
+  error_message = ''
+  
+  if request.method == 'POST':
+     profile_form = ProfileForm(request.POST, instance=request.user.profile)
+     if profile_form.is_valid():
+       profile_form.save()
+       return redirect('profile_detail', user_id)
 
+  else:
+        error_message = 'Invalid Inputs'
+
+  profile_form = ProfileForm()
+  context= {"profile_form": profile_form, 'error_message': error_message}
+  
+  return render(request, 'main_app/profile_form.html', context)
+  
 
 # class ProfileView(DetailView):
 #   model = Profile
