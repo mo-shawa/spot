@@ -11,6 +11,8 @@ class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     postal_code = models.CharField(max_length=7)
     bio = models.TextField(max_length=250)
+    image = models.CharField(max_length=200, blank=True)
+
     # friends = models.ManyToManyField(Profile)
     def __str__(self):
         return self.user.get_full_name()
@@ -30,9 +32,8 @@ class Dog(models.Model):
     breed = models.CharField(max_length=100)
     hobbies = models.TextField(max_length=200)
     fav_snack = models.CharField(max_length=100)
-    postal_code = models.CharField(max_length=7)
     bio = models.TextField(max_length=250)
-    
+    image = models.CharField(max_length=200, blank=True)
     age = models.IntegerField()
     profile = models.ForeignKey(Profile, on_delete=models.CASCADE)
     
@@ -42,7 +43,18 @@ class Dog(models.Model):
     def get_absolute_url(self):
         return reverse('detail', kwargs={'dog_id': self.id})
 
+
 class Post(models.Model):
     creator = models.ForeignKey(Dog, on_delete=models.CASCADE)
     text = models.TextField(max_length=300)
-    image = models.CharField(max_length=200)
+    image = models.CharField(max_length=200, blank=True)
+
+
+class Photo(models.Model):
+    url = models.CharField(max_length=200)
+    dog = models.ForeignKey(Dog, on_delete=models.CASCADE, blank=True)
+    profile = models.ForeignKey(Profile, on_delete=models.CASCADE, blank=True)
+    post = models.ForeignKey(Post, on_delete=models.CASCADE, blank=True)
+
+    def __str__(self):
+        return f"Photo for cat_id: {self.cat_id} @{self.url}"

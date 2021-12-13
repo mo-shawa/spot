@@ -9,5 +9,5 @@ urlpatterns = [
     path('accounts/<int:user_id>', views.profile_detail, name='profile_detail'),
     # DOG PATHS
     path('dogs/create/',views.DogCreate.as_view(), name='dog_create'),
-
+    path('accounts/<int:user_id>/update', views.profile_update, name='profile_update')
 ]

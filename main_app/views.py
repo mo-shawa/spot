@@ -41,6 +41,12 @@ class ProfileCreate(LoginRequiredMixin, CreateView):
   model = Profile
   fields = "__all__"
 
+def profile_update(request, user_id):
+  profile_form = ProfileForm() 
+  context= {"profile_form": profile_form}
+  return render(request, 'main_app/profile_form.html', context)
+
+
 # class ProfileView(DetailView):
 #   model = Profile
 
