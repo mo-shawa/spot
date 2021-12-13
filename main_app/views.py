@@ -6,9 +6,14 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from main_app.forms import ProfileForm
-from main_app.models import Dog, Profile
+import boto3
+import uuid
+from main_app.models import Dog, Profile, Photo
 
-# Create your views here.
+
+S3_BASE_URL = 'https://s3.us-east-2.amazonaws.com/'
+BUCKET = 'hellofren'
+
 
 def home(request):
   return render(request, 'home.html')
@@ -32,11 +37,23 @@ class ProfileCreate(LoginRequiredMixin, CreateView):
   model = Profile
   fields = "__all__"
 
-def profile_update(request):
-  profile_form = ProfileForm() 
-  context= {"profile_form": profile_form}
-  return render(request, 'main_app/profile_form.html', context)
+def profile_update(request, user_id):
+  error_message = ''
+  
+  if request.method == 'POST':
+     profile_form = ProfileForm(request.POST, instance=request.user.profile)
+     if profile_form.is_valid():
+       profile_form.save()
+       return redirect('profile_detail', user_id)
 
+  else:
+        error_message = 'Invalid Inputs'
+
+  profile_form = ProfileForm()
+  context= {"profile_form": profile_form, 'error_message': error_message}
+  
+  return render(request, 'main_app/profile_form.html', context)
+  
 
 # class ProfileView(DetailView):
 #   model = Profile
@@ -52,3 +69,21 @@ class DogCreate(LoginRequiredMixin,CreateView):
   def form_valid(self,form):
     form.instance.user.profile = self.request.user.profile
     return super().form_valid(form)
+
+def profile_photo(request, user_id):
+  photo_file = request.FILES.get("photo-file", None)
+  if photo_file:
+        s3 = boto3.client('s3')
+        # need a unique "key" for S3 / needs image file extension too
+        key = uuid.uuid4().hex[:6] + photo_file.name[photo_file.name.rfind('.'):]
+        # just in case something goes wrong
+        try:
+            s3.upload_fileobj(photo_file, BUCKET, key)
+            # build the full url string
+            url = f"{S3_BASE_URL}{BUCKET}/{key}"
+            # we can assign to cat_id or cat (if you have a cat object)
+            photo = Photo(url=url, user_id=user_id)
+            photo.save()
+        except:
+            print('An error occurred uploading file to S3')
+  return redirect('profile_detail', user_id=user_id)
