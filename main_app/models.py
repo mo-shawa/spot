@@ -12,6 +12,8 @@ class Profile(models.Model):
     postal_code = models.CharField(max_length=7)
     bio = models.TextField(max_length=250)
     # friends = models.ManyToManyField(Profile)
+    def __str__(self):
+        return self.user.get_full_name()
 
 @receiver(post_save, sender=User)
 def create_user_profile(sender, instance, created, **kwargs):

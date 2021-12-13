@@ -6,7 +6,7 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from main_app.forms import ProfileForm
-from main_app.models import Profile
+from main_app.models import Dog, Profile
 # Create your views here.
 
 def home(request):
@@ -40,3 +40,18 @@ def signup(request):
 class ProfileCreate(LoginRequiredMixin, CreateView):
   model = Profile
   fields = "__all__"
+
+# class ProfileView(DetailView):
+#   model = Profile
+
+def profile_detail(request, user_id):
+  return render(request, 'profile.html')
+
+class DogCreate(LoginRequiredMixin,CreateView):
+  model = Dog
+  # fields = ['name','birthday','breed','hobbies','fav_snack','hobbies',]
+  fields = '__all__'
+
+  def form_valid(self,form):
+    form.instance.user.profile = self.request.user.profile
+    return super().form_valid(form)
