@@ -37,14 +37,14 @@ class ProfileCreate(LoginRequiredMixin, CreateView):
   model = Profile
   fields = "__all__"
 
-def profile_update(request, user_id):
+def profile_update(request):
   error_message = ''
   
   if request.method == 'POST':
      profile_form = ProfileForm(request.POST, instance=request.user.profile)
      if profile_form.is_valid():
        profile_form.save()
-       return redirect('profile_detail', user_id)
+       return redirect('profile_detail')
 
   else:
         error_message = 'Invalid Inputs'
@@ -58,7 +58,7 @@ def profile_update(request, user_id):
 # class ProfileView(DetailView):
 #   model = Profile
 
-def profile_detail(request, user_id):
+def profile_detail(request):
   return render(request, 'profile.html')
 
 class DogCreate(LoginRequiredMixin,CreateView):

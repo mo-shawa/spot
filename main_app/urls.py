@@ -7,9 +7,9 @@ urlpatterns = [
     path('accounts/signup/', views.signup, name='signup'),
     path('accounts/signup/<int:user_id>/', views.ProfileCreate.as_view(), name="profile_create"),
     
-    path('accounts/<int:user_id>', views.profile_detail, name='profile_detail'),
+    path('accounts/profile/', views.profile_detail, name='profile_detail'),
     # DOG PATHS
     path('dogs/create/',views.DogCreate.as_view(), name='dog_create'),
-    path('accounts/update', views.profile_update, name='profile_update'),
+    path('accounts/profile/update/', views.profile_update, name='profile_update'),
     path('accounts/<int:user_id>/profile-photo', views.profile_photo, name="profile_photo"),
 ]

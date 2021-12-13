@@ -1,49 +1,46 @@
 {%extends 'base.html'%} {%block content%}
 <section
-  class="d-flex flex-column justify-content-start align-items-center py-3"
-  style="min-height: 100vh"
+	class="d-flex flex-column justify-content-start align-items-center py-3"
+	style="min-height: 100vh"
 >
-  <img
-    src="https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png"
-    class="rounded-circle mw-100 py-3 my-3"
-  />
-  <h1 class="my-3">{{user.get_full_name}}</h1>
-  <div class="d-flex justify-content-around">
-    <a href="/dogs/create/">
-      <button class="btn btn-primary">Add Dog</button>
-    </a>
-	<a class="btn" href="{% url 'profile_update' user.id %}">
-		Edit Profile
-	</a>
-    
-  </div>
-  <div class="m-3 rounded p-3 bg-primary">
-    <h1 class="text-white text-center">Dogs</h1>
-    <div
-      class="d-flex align-items-center justify-content-evenly flex-xl-nowrap"
-    >
-      {% for dog in user.profile.dog_set.all %}
-      <div
-        class="bg-white m-1 d-flex flex-column align-items-center p-3 rounded"
-        style="max-width: fit-content"
-      >
-        <img
-          src="https://styles.redditmedia.com/t5_59clj4/styles/communityIcon_3yigconadhw71.png"
-          class="rounded-circle m-3 shadow"
-          style="width: 100px"
-        />
-        <h1>{{ dog.name }}</h1>
-        <button class="btn btn-block m-1 btn-primary">
-          Post as {{dog.name}}
-        </button>
-      </div>
-      {% endfor %}
-    </div>
-  </div>
-  <div>
-    <h3>Profile Bio</h3>
-    <p>{{ user.profile.bio }}</p>
-  </div>
+	<img
+		src="https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png"
+		class="rounded-circle mw-100 py-3 my-3"
+	/>
+	<h1 class="my-3">{{user.get_full_name}}</h1>
+	<div class="d-flex justify-content-around">
+		<a href="/dogs/create/">
+			<button class="btn btn-primary">Add Dog</button>
+		</a>
+		<a class="btn" href="{% url 'profile_update' %}"> Edit Profile </a>
+	</div>
+	<div class="m-3 rounded p-3 bg-primary">
+		<h1 class="text-white text-center">Dogs</h1>
+		<div
+			class="d-flex align-items-center justify-content-evenly flex-xl-nowrap"
+		>
+			{% for dog in user.profile.dog_set.all %}
+			<div
+				class="bg-white m-1 d-flex flex-column align-items-center p-3 rounded"
+				style="max-width: fit-content"
+			>
+				<img
+					src="https://styles.redditmedia.com/t5_59clj4/styles/communityIcon_3yigconadhw71.png"
+					class="rounded-circle m-3 shadow"
+					style="width: 100px"
+				/>
+				<h1>{{ dog.name }}</h1>
+				<button class="btn btn-block m-1 btn-primary">
+					Post as {{dog.name}}
+				</button>
+			</div>
+			{% endfor %}
+		</div>
+	</div>
+	<div>
+		<h3>Profile Bio</h3>
+		<p>{{ user.profile.bio }}</p>
+	</div>
 </section>
 
 {%endblock%}
