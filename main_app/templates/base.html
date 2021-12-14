@@ -27,7 +27,7 @@
 	<body>
 		<header class=" bg-primary">
 			<nav class="navbar navbar-dark bg-primary navbar-expand-lg container">
-					<a href="/" class="navbar-brand"><h1>Spot</h1></a>
+					<a href="{% url 'post_list' %}" class="navbar-brand"><h1>Spot</h1></a>
 					<div class="navbar-nav">
 						<!-- changes below -->
 						{% if user.is_authenticated %}
