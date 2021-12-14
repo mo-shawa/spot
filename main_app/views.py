@@ -62,12 +62,14 @@ def profile_detail(request):
   return render(request, 'profile.html')
 
 class DogCreate(LoginRequiredMixin,CreateView):
+  print('here')
   model = Dog
-  # fields = ['name','birthday','breed','hobbies','fav_snack','hobbies',]
-  fields = '__all__'
+  fields = ['name','birthday','breed','hobbies','fav_snack','bio','age']
+  success_url = '/accounts/profile/'
 
   def form_valid(self,form):
-    form.instance.user.profile = self.request.user.profile
+    profile = Profile.objects.get(user = self.request.user.id)
+    form.instance.profile = profile
     return super().form_valid(form)
 
 def profile_photo(request, user_id):

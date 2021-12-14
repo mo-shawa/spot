@@ -16,8 +16,8 @@ class Profile(models.Model):
     # friends = models.ManyToManyField(Profile)
     def __str__(self):
         return self.user.get_full_name()
-    # def get_absolute_url(self):
-        # return reverse('profile_detail', kwargs={'user_id': self.user.id})
+    def get_absolute_url(self):
+        return reverse('profile_detail', kwargs={'user_id': self.user.id})
 
 @receiver(post_save, sender=User)
 def create_user_profile(sender, instance, created, **kwargs):
@@ -30,7 +30,7 @@ def save_user_profile(sender, instance, **kwargs):
 
 class Dog(models.Model): 
     name = models.CharField(max_length=100)
-    birthday = models.DateField('BirthDay')
+    birthday = models.DateField('Birthday')
     breed = models.CharField(max_length=100)
     hobbies = models.TextField(max_length=200)
     fav_snack = models.CharField(max_length=100)
@@ -42,8 +42,8 @@ class Dog(models.Model):
     def __str__(self):
         return self.name
     
-    def get_absolute_url(self):
-        return reverse('detail', kwargs={'dog_id': self.id})
+    # def get_absolute_url(self):
+    #     return reverse('profile', kwargs={'dog_id': self.id})
 
 
 class Post(models.Model):
