@@ -70,9 +70,12 @@ class DogCreate(LoginRequiredMixin,CreateView):
     form.instance.user.profile = self.request.user.profile
     return super().form_valid(form)
 
-def profile_photo(request, user_id):
+def profile_photo(request):
   photo_file = request.FILES.get("photo-file", None)
   print("photofunc")
+  # form.instance.user.profile = self.request.user.profile
+  user = request.user.id
+  print(user)
   if photo_file:
         print("photofile")
         s3 = boto3.client('s3')
@@ -84,7 +87,7 @@ def profile_photo(request, user_id):
             # build the full url string
             url = f"{S3_BASE_URL}{BUCKET}/{key}"
             
-            profile = Profile.objects.get(user=user_id)
+            profile = Profile.objects.get(user=user)
             profile_id = profile.id
             profile.image = url
             profile.save()
