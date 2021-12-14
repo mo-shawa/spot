@@ -103,3 +103,11 @@ def profile_photo(request):
         except:
             print('An error occurred uploading file to S3')
   return redirect('profile_detail')
+
+def post_create(request):
+  print(request.POST)
+  dog = Dog.objects.get(id=request.POST["creator"])
+  Post.objects.create(creator=dog, text=request.POST["text"])
+  
+  # post = Post.
+  return redirect('post_list')

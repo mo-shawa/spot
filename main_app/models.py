@@ -6,6 +6,7 @@ from datetime import date
 from django.contrib.auth.models import User
 from django.db.models.signals import post_save
 from django.dispatch import receiver
+import datetime
 # Create your models here.
 
 class Profile(models.Model):
@@ -42,15 +43,16 @@ class Dog(models.Model):
     
     def __str__(self):
         return self.name
-    
-    # def get_absolute_url(self):
-    #     return reverse('profile', kwargs={'dog_id': self.id})
-
+  
 
 class Post(models.Model):
     creator = models.ForeignKey(Dog, on_delete=models.CASCADE)
     text = models.TextField(max_length=300)
     image = models.CharField(max_length=200, blank=True)
+    created_at = models.DateTimeField(auto_now_add=True)    
+         # change the default sort
+    class Meta:
+        ordering = ['-created_at']
 
 class Comment(models.Model):
     post = models.ForeignKey(Post, on_delete=models.CASCADE)
@@ -65,8 +67,7 @@ class Photo(models.Model):
     profile = models.ForeignKey(Profile, on_delete=models.CASCADE, blank=True)
     post = models.ForeignKey(Post, on_delete=models.CASCADE, blank=True)
 
-    def __str__(self):
-        return f"Photo for cat_id: {self.cat_id} @{self.url}"
+   
 
 # class Following(models.Models):
 #     follower = models.ForeignKey(User, on_delete=models)
