@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<h1>Feed</h1>
+
+<div class="m-3 rounded p-3 bg-primary">
+    <div class="card">
+        
+        <p>Make New Post as</p>
+        <form action="p">
+            <select name="dog">
+                {% for dog in user.profile.dog_set.all %} 
+                <option value="{{ dog.name }}">{{ dog.name }}</option>
+                {% endfor %}
+            </select>
+        </form>
+        
+        <p></p>
+        <div class="bg-white m-1 d-flex flex-column align-items-center p-3 rounded">
+            <span class="text-white">{{ post.creator.name }}</span>
+            <p>{{ post.text}}</p>
+            <img class='img-thumbnail img-fluid  rounded float-right'src="{{ post.image }}" style="max-width: fit-content" alt="">
+        </div>
+    </div>
+</div>
+
+{% for post in post_list %}
+<div class="m-3 rounded p-3 bg-primary">
+    <div class="card">
+        <div class="bg-white m-1 d-flex flex-column align-items-center p-3 rounded">
+            <span class="text-white">{{ post.creator.name }}</span>
+            <p>{{ post.text}}</p>
+            <img class='img-thumbnail img-fluid  rounded float-right'src="{{ post.image }}" style="max-width: fit-content" alt="">
+        </div>
+    </div>
+</div>
+  
+{% endfor %}
+
+{% endblock %}

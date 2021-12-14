@@ -8,12 +8,14 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from main_app.forms import ProfileForm
 import boto3
 import uuid
-from main_app.models import Dog, Profile, Photo
+from main_app.models import Dog, Profile, Photo, Post
 
 
 S3_BASE_URL = 'https://s3.us-east-2.amazonaws.com/'
 BUCKET = 'hellofren'
 
+class PostList(ListView):
+  model = Post
 
 def home(request):
   return render(request, 'home.html')

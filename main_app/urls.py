@@ -10,4 +10,5 @@ urlpatterns = [
     path('dogs/create/',views.DogCreate.as_view(), name='dog_create'),
     path('accounts/profile/update/', views.profile_update, name='profile_update'),
     path('accounts/profile/profile-photo/', views.profile_photo, name="profile_photo"),
+    path('posts/', views.PostList.as_view(), name='post_list')
 ]

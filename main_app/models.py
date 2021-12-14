@@ -1,4 +1,5 @@
 from django.db import models
+from django.db.models.deletion import CASCADE
 from django.urls import reverse
 from datetime import date
 # Import the User
@@ -51,6 +52,12 @@ class Post(models.Model):
     text = models.TextField(max_length=300)
     image = models.CharField(max_length=200, blank=True)
 
+class Comment(models.Model):
+    post = models.ForeignKey(Post, on_delete=models.CASCADE)
+    author = models.ForeignKey(User, on_delete=models.CASCADE)
+    text = models.TextField(max_length=250)
+    
+
 
 class Photo(models.Model):
     url = models.CharField(max_length=200)
@@ -60,3 +67,8 @@ class Photo(models.Model):
 
     def __str__(self):
         return f"Photo for cat_id: {self.cat_id} @{self.url}"
+
+# class Following(models.Models):
+#     follower = models.ForeignKey(User, on_delete=models)
+#     follower = models.ForeignKey(User, on_delete=models)
+    
