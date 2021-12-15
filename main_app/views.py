@@ -79,7 +79,7 @@ def profile_update(request):
      if profile_form.is_valid():
        profile_form.save()
        profile_photo(request)
-       return redirect('profile_detail')
+       return redirect('profile_detail', profile_id = request.user.profile.id)
 
   else:
         error_message = 'Invalid Inputs'
@@ -93,14 +93,14 @@ def profile_update(request):
 # class ProfileView(DetailView):
 #   model = Profile
 
-def profile_detail(request):
-  return render(request, 'profile.html')
+def profile_detail(request, profile_id):
+  profile = Profile.objects.get(id = profile_id)
+  return render(request, 'profile.html', {'profile':profile})
 
 class DogCreate(LoginRequiredMixin,CreateView):
-  print('here')
   model = Dog
   fields = ['name','birthday','breed','hobbies','fav_snack','bio','age']
-  success_url = '/accounts/profile/'
+  # success_url = '/accounts/profile/'
 
   def form_valid(self,form):
     profile = Profile.objects.get(user = self.request.user.id)
@@ -135,7 +135,7 @@ def profile_photo(request):
             photo.save()
         except:
             print('An error occurred uploading file to S3')
-  return redirect('profile_detail')
+  return redirect('profile_detail', profile_id= request.user.profile.id)
 
 def post_photo(request):
   photo_file = request.FILES.get("photo-file", None)

@@ -43,6 +43,9 @@ class Dog(models.Model):
     
     def __str__(self):
         return self.name
+    
+    def get_absolute_url(self):
+        return reverse('profile_detail', kwargs={'profile_id':self.profile.id})
   
 
 class Post(models.Model):

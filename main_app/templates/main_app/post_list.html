@@ -55,8 +55,12 @@
 				/>
 				<a href="{% url 'post_detail' post.id  %}">
 					<div class="m-2 d-flex flex-column">
-						<span>{{ post.creator.name }}</span>
-						<small>{{ post.creator.profile }} - {{post.created_at}}</small>
+						<span class="fw-bold">{{ post.creator.name }}</span>
+						<a href="{% url 'profile_detail' post.creator.profile.id %}"
+							><small
+								>{{ post.creator.profile }} - {{post.created_at}}</small
+							></a
+						>
 					</div>
 				</a>
 				<hr />
