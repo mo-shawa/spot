@@ -61,6 +61,14 @@ class Comment(models.Model):
     post = models.ForeignKey(Post, on_delete=models.CASCADE)
     author = models.ForeignKey(User, on_delete=models.CASCADE)
     text = models.TextField(max_length=250)
+    created_at = models.DateTimeField(auto_now_add=True) 
+
+    class Meta:
+        ordering = ['-created_at']   
+
+    def __str__(self):
+        return 'Comment {} by {}'.format(self.text, self.author.get_full_name())
+
     
 
 

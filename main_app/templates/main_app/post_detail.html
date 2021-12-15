@@ -11,5 +11,13 @@
 		><button class="btn btn-danger">Delete post</button></a
 	>
 </div>
-
+<div class="p-3 shadow">
+	{% for comment in post.comment_set.all %}
+	<p>{{comment.text}}</p>
+	<hr />
+	<a href="{% url 'profile_detail'%}"
+		><small>{{comment.author.get_full_name}}</small></a
+	>
+	{%endfor%}
+</div>
 {%endblock%}
