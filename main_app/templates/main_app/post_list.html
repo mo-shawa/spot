@@ -42,41 +42,52 @@
 
 {% for post in post_list %}
 <div class="m-3 rounded p-3 shadow">
-	<div class="">
-		<div class="bg-white m-1 d-flex flex-column align-items-center p-3 rounded">
-			<div
-				class="
-					border-bottom
-					pb-3
-					mb-3
-					w-100
-					d-flex
-					flex-row
-					align-items-center
-					justify-content-start
-				"
-			>
-				<img
-					src="https://styles.redditmedia.com/t5_59clj4/styles/communityIcon_3yigconadhw71.png"
-					alt=""
-					class="img-thumbnail rounded-circle"
-					style="width: 80px"
-				/>
-				<a href="{% url 'post_detail' post.id  %}">
-					<div class="m-2 d-flex flex-column">
-						<span class="fw-bold">{{ post.creator.name }}</span>
-						<a href="{% url 'profile_detail' post.creator.profile.id %}"
-							><small
-								>{{ post.creator.profile }} - {{post.created_at}}</small
-							></a
-						>
-					</div>
-				</a>
-			</div>
-			<p>{{ post.text}}</p>
-
-			<img class="mw-100 rounded float-right" src="{{ post.image }}" alt="" />
+	<div class="bg-white m-1 d-flex flex-column align-items-center p-3 rounded">
+		<div
+			class="
+				border-bottom
+				pb-3
+				mb-3
+				w-100
+				d-flex
+				flex-row
+				align-items-center
+				justify-content-start
+			"
+		>
+			<img
+				src="https://styles.redditmedia.com/t5_59clj4/styles/communityIcon_3yigconadhw71.png"
+				alt=""
+				class="img-thumbnail rounded-circle"
+				style="width: 80px"
+			/>
+			<a href="{% url 'post_detail' post.id  %}">
+				<div class="m-2 d-flex flex-column">
+					<span class="fw-bold">{{ post.creator.name }}</span>
+					<a href="{% url 'profile_detail' post.creator.profile.id %}"
+						><small>{{ post.creator.profile }} - {{post.created_at}}</small></a
+					>
+				</div>
+			</a>
 		</div>
+		<p>{{ post.text}}</p>
+
+		<img class="mw-100 rounded float-right" src="{{ post.image }}" alt="" />
+	</div>
+	<hr />
+	<div>
+		<details>
+			<summary>View {{post.comment_set.count}} comments</summary>
+			{% for comment in post.comment_set.all %}
+			<div class="">
+				<hr />
+				<p>{{comment.text}}</p>
+				<a href="{% url 'profile_detail' comment.author.id %}"
+					><small>- {{comment.author.get_full_name}}</small></a
+				>
+			</div>
+			{%endfor%}
+		</details>
 	</div>
 </div>
 
