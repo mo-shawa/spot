@@ -13,7 +13,7 @@
 </div>
 <div class="p-3 shadow">
 	<h5>Comments</h5>
-	<form action="" method="POST">
+	<form action="{% url 'comment_create' post.id %}" method="POST">
 		{%csrf_token%} {{form.text}}
 		<button type="submit">Add Comment</button>
 	</form>
