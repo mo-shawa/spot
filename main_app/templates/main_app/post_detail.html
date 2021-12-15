@@ -3,26 +3,49 @@
 <div>
 	<img src="{{post.image}}" alt="" />
 	<h3>{{post.creator.name}}</h3>
+	<h3>{{post.creator.profile.user.id}}</h3>
 	<p>{{post.text}}</p>
-	<a href="{% url 'post_update' post.id %}"
-		><button class="btn shadow">Edit post</button></a
-	>
-	<a href="{% url 'post_delete' post.id %}"
-		><button class="btn btn-danger">Delete post</button></a
-	>
+	{% if post.creator.profile.user.id == user.id %}
+	<div>
+		<a href="{% url 'post_update' post.id %}"
+			><button class="btn shadow">Edit post</button></a
+		>
+		<a href="{% url 'post_delete' post.id %}"
+			><button class="btn btn-danger">Delete post</button></a
+		>
+	</div>
+	{%endif%}
 </div>
 <div class="p-3 shadow">
 	<h5>Comments</h5>
-	<form action="{% url 'comment_create' post.id %}" method="POST">
+	<form
+		class="d-flex align-items-center justify-content-start"
+		action="{% url 'comment_create' post.id %}"
+		method="POST"
+	>
 		{%csrf_token%} {{form.text}}
-		<button type="submit">Add Comment</button>
+		<button class="btn btn-primary mx-2" type="submit">Add Comment</button>
 	</form>
 	{% for comment in post.comment_set.all %}
-	<p>{{comment.text}}</p>
 	<hr />
-	<a href="{% url 'profile_detail'%}"
+	<a href="/accounts/profile/{{comment.author.id}}/"
 		><small>{{comment.author.get_full_name}}</small></a
 	>
+	<p>{{comment.text}}</p>
 	{%endfor%}
 </div>
+
+<script>
+	function calcHeight(value) {
+		let numberOfLineBreaks = (value.match(/\n/g) || []).length;
+		// min-height + lines x line-height + padding + border
+		let newHeight = 20 + numberOfLineBreaks * 20 + 12 + 2;
+		return newHeight;
+	}
+
+	let textarea = document.querySelector("#id_text");
+	textarea.addEventListener("keyup", () => {
+		textarea.style.height = calcHeight(textarea.value) + "px";
+	});
+</script>
 {%endblock%}
