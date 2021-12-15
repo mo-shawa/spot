@@ -5,7 +5,7 @@
 <div class="m-3 rounded p-3 bg-primary">
 	<div class="card">
 		<p>New Post as</p>
-		<form action="{% url 'post_create' %}" method="POST">
+		<form action="{% url 'post_create' %}" enctype="multipart/form-data" method="POST">
 			{% csrf_token %}
 			<select class="form-control" name="creator">
 				{% for dog in user.profile.dog_set.all %}
@@ -17,19 +17,8 @@
 					cols="30"
 					rows="5"
 				></textarea>
-
+        <input type="file" name="photo-file" />
         <button class="btn btn-success" type="submit">Post</button>
-        <form
-          action="{% url 'profile_photo' %}"
-          enctype="multipart/form-data"
-          method="POST"
-          class="card-panel"
-        >
-          {% csrf_token %}
-          <input type="file" name="photo-file" />
-          <br />
-          <input type="submit" class="btn" value="Upload Photo" />
-        </form>
       </select>
     </form>
 
@@ -58,7 +47,7 @@
 				<p>{{ post.text}}</p>
 				<p>{{post.created_at}}</p>
 				<img
-					class="img-thumbnail img-fluid rounded float-right"
+					class="img-thumbnail rounded float-right"
 					src="{{ post.image }}"
 					style="max-width: fit-content"
 					alt=""

@@ -119,7 +119,7 @@ def profile_photo(request):
 
 def post_photo(request):
   photo_file = request.FILES.get("photo-file", None)
-  print("photofunc")
+  print("in post photo function: ",request.POST)
   # form.instance.user.profile = self.request.user.profile
   user = request.user.id
   print(user)
@@ -132,24 +132,27 @@ def post_photo(request):
         try:
             s3.upload_fileobj(photo_file, BUCKET, key)
             # build the full url string
-            url = f"{S3_BASE_URL}{BUCKET}/{key}"
+            url = f"{S3_BASE_URL}{BUCKET}/{key}"      
             
-            profile = Profile.objects.get(user=user)
-            profile_id = profile.id
-            profile.image = url
-            profile.save()
-            print(profile)
             
-            # we can assign to cat_id or cat (if you have a cat object)
-            photo = Photo(url=url, profile=profile_id)
-            photo.save()
+          
+            return url
         except:
             print('An error occurred uploading file to S3')
   return redirect('profile_detail')
+
 def post_create(request):
   print(request.POST)
-  dog = Dog.objects.get(id=request.POST["creator"])
-  Post.objects.create(creator=dog, text=request.POST["text"])
   
-  # post = Post.
+  print("profile_id", )
+  dog = Dog.objects.get(id=request.POST["creator"])
+  print(dog)
+  post = Post.objects.create(creator=dog, text=request.POST["text"])
+  url = post_photo(request)
+  post.image = url
+  post.save()
+  photo = Photo(url=url, dog=dog, post=post, profile=dog.profile)
+  photo.save()
+  
+
   return redirect('post_list')
