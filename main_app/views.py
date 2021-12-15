@@ -17,6 +17,18 @@ BUCKET = 'hellofren'
 class PostList(ListView):
   model = Post
 
+class PostDetail(LoginRequiredMixin, DetailView):
+  model = Post
+
+class PostUpdate(LoginRequiredMixin, UpdateView):
+  model = Post
+  fields = ['image','text']
+
+class PostDelete(LoginRequiredMixin,DeleteView):
+  model = Post
+  success_url = '/posts/'
+
+
 def home(request):
   return render(request, 'home.html')
 
