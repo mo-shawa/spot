@@ -3,20 +3,20 @@
 <h1>Feed</h1>
 
 <div class="m-3 rounded p-3 bg-primary">
-  <div class="card">
-    <p>New Post as</p>
-    <form action="{% url 'post_create' %}" method="POST">
-      {% csrf_token %}
-      <select class="form-control" name="creator">
-        {% for dog in user.profile.dog_set.all %}
-        <option value="{{ dog.id }}">{{ dog.name }}</option>
-        {% endfor %}
-        <textarea
-          class="form-control"
-          name="text"
-          cols="30"
-          rows="5"
-        ></textarea>
+	<div class="card">
+		<p>New Post as</p>
+		<form action="{% url 'post_create' %}" method="POST">
+			{% csrf_token %}
+			<select class="form-control" name="creator">
+				{% for dog in user.profile.dog_set.all %}
+				<option value="{{ dog.id }}">{{ dog.name }}</option>
+				{% endfor %}
+				<textarea
+					class="form-control"
+					name="text"
+					cols="30"
+					rows="5"
+				></textarea>
 
         <button class="btn btn-success" type="submit">Post</button>
         <form
@@ -49,20 +49,23 @@
 
 {% for post in post_list %}
 <div class="m-3 rounded p-3 bg-primary">
-  <div class="card">
-    <div class="bg-white m-1 d-flex flex-column align-items-center p-3 rounded">
-      <span class="text-white">{{ post.creator.name }}</span>
-      <p>{{post.created_at}}</p>
-      <p>{{ post.text}}</p>
-
-      <img
-        class="img-thumbnail img-fluid rounded float-right"
-        src="{{ post.image }}"
-        style="max-width: fit-content"
-        alt=""
-      />
-    </div>
-  </div>
+	<a href="{% url 'post_detail' post.id  %}">
+		<div class="card">
+			<div
+				class="bg-white m-1 d-flex flex-column align-items-center p-3 rounded"
+			>
+				<span class="text-white">{{ post.creator.name }}</span>
+				<p>{{ post.text}}</p>
+				<p>{{post.created_at}}</p>
+				<img
+					class="img-thumbnail img-fluid rounded float-right"
+					src="{{ post.image }}"
+					style="max-width: fit-content"
+					alt=""
+				/>
+			</div>
+		</div>
+	</a>
 </div>
 
 {% endfor %} {% endblock %}

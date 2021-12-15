@@ -1,0 +1,23 @@
+{% extends 'base.html' %} {% block content %}
+<h1>POST DETAIL</h1>
+<div>
+	<img src="{{post.image}}" alt="" />
+	<h3>{{post.creator.name}}</h3>
+	<p>{{post.text}}</p>
+	<a href="{% url 'post_update' post.id %}"
+		><button class="btn shadow">Edit post</button></a
+	>
+	<a href="{% url 'post_delete' post.id %}"
+		><button class="btn btn-danger">Delete post</button></a
+	>
+</div>
+<div class="p-3 shadow">
+	{% for comment in post.comment_set.all %}
+	<p>{{comment.text}}</p>
+	<hr />
+	<a href="{% url 'profile_detail'%}"
+		><small>{{comment.author.get_full_name}}</small></a
+	>
+	{%endfor%}
+</div>
+{%endblock%}
