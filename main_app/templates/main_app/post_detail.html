@@ -12,6 +12,11 @@
 	>
 </div>
 <div class="p-3 shadow">
+	<h5>Comments</h5>
+	<form action="" method="POST">
+		{%csrf_token%} {{form.text}}
+		<button type="submit">Add Comment</button>
+	</form>
 	{% for comment in post.comment_set.all %}
 	<p>{{comment.text}}</p>
 	<hr />

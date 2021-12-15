@@ -5,10 +5,10 @@ from django.contrib.auth import login
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
-from main_app.forms import ProfileForm, UserForm
+from main_app.forms import ProfileForm, UserForm, CommentForm
 import boto3
 import uuid
-from main_app.models import Dog, Profile, Photo, Post
+from main_app.models import Comment, Dog, Profile, Photo, Post
 
 
 S3_BASE_URL = 'https://s3.us-east-2.amazonaws.com/'
@@ -17,8 +17,14 @@ BUCKET = 'hellofren'
 class PostList(ListView):
   model = Post
 
-class PostDetail(LoginRequiredMixin, DetailView):
-  model = Post
+# class PostDetail(LoginRequiredMixin, DetailView):
+#   model = Post
+
+def post_detail(request, post_id):
+  post = Post.objects.get(id=post_id)
+  comment_form = CommentForm
+  return render(request,'main_app/post_detail.html',{'post':post, 'form': comment_form})
+
 
 class PostUpdate(LoginRequiredMixin, UpdateView):
   model = Post
@@ -27,6 +33,14 @@ class PostUpdate(LoginRequiredMixin, UpdateView):
 class PostDelete(LoginRequiredMixin,DeleteView):
   model = Post
   success_url = '/posts/'
+
+# @login_required
+# def add_comment(request,post_id):
+#   form = CommentForm
+
+
+# class CommentCreate(LoginRequiredMixin,CreateView):
+#   model = Comment
 
 
 def home(request):
