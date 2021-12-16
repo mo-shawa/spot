@@ -2,15 +2,17 @@
 
 <h1 class="text-center p-3 display-1 spot-text">Feed</h1>
 
-<div class="m-3 shadow rounded p-3">
-	<div class="py-3">
+<div class="border border-primary m-3 shadow rounded p-3">
+	<div class="py-1">
 		<form
 			action="{% url 'post_create' %}"
 			enctype="multipart/form-data"
 			method="POST"
 		>
 			{% csrf_token %}
-			<label for="creator">New Post as:</label>
+			<label class="spot-text mb-1" for="creator"
+				><strong>Post as:</strong></label
+			>
 			<select class="form-control" name="creator">
 				{% for dog in user.profile.dog_set.all %}
 				<option value="{{ dog.id }}">{{ dog.name }}</option>
@@ -23,10 +25,11 @@
 						name="text"
 						cols="30"
 						rows="5"
+						placeholder=" ˁ˚ᴥ˚ˀ Happy Howl-idays! Write your paw-some message here..."
 					></textarea>
 				</div>
 				<div class="form-group">
-					<input class="" type="file" name="photo-file" />
+					<input class="form-control" type="file" name="photo-file" />
 				</div>
 				<button class="btn w-100 text-white spot-bg my-1" type="submit">
 					Post
@@ -38,7 +41,18 @@
 
 {% for post in post_list %}
 <div class="m-3 rounded p-3 shadow">
-	<div class="bg-white m-1 d-flex flex-column align-items-center p-3 rounded">
+	<div
+		class="
+			border-bottom
+			bg-white
+			m-1
+			d-flex
+			flex-column
+			align-items-center
+			p-3
+			rounded
+		"
+	>
 		<div
 			class="
 				border-bottom
@@ -52,50 +66,49 @@
 			"
 		>
 			<a href="{% url 'dog_detail' post.creator.id  %}">
-				{% if post.creator.image %}
 				<img
 					src="{{ post.creator.image }}"
 					class="img-thumbnail spot-bg-25 rounded-circle"
 					style="width: 80px"
 				/>
-				{% else %}
-
-				<img
-					src="https://styles.redditmedia.com/t5_59clj4/styles/communityIcon_3yigconadhw71.png"
-					class="img-thumbnail spot-bg-25 rounded-circle"
-					style="width: 80px"
-				/>
-				{% endif %}
 			</a>
-			<!-- <a href="{% url 'dog_detail' post.creator.id  %}">
-				<img
-					src="https://styles.redditmedia.com/t5_59clj4/styles/communityIcon_3yigconadhw71.png"
-					alt=""
-					class="img-thumbnail spot-bg-25 rounded-circle"
-					style="width: 80px"
-				/>
-			</a> -->
+
 			<a href="{% url 'dog_detail' post.creator.id  %}">
 				<div class="m-2 d-flex flex-column">
 					<span class="fw-bold">{{ post.creator.name }}</span>
 					<a href="{% url 'profile_detail' post.creator.profile.id %}"
-						><small>{{ post.creator.profile }} - {{post.created_at}}</small></a
+						><small
+							>{{ post.creator.profile }}
+							<span class="text-muted">- {{post.created_at}}</span></small
+						></a
 					>
 				</div>
 			</a>
 		</div>
-		<p>{{ post.text}}</p>
-
+		<div>
+			<p>{{ post.text}}</p>
+		</div>
 		<a href="{% url 'post_detail' post.id  %}"
-			><img class="mw-100 rounded float-right" src="{{ post.image }}" alt=""
+			><img
+				style="max-height: 550px"
+				class="mw-100 rounded float-right"
+				src="{{ post.image }}"
+				alt=""
 		/></a>
 	</div>
-	<hr />
-	<div>
-		<details>
-			<summary>View {{post.comment_set.count}} comments</summary>
+
+	<div class="pt-1">
+		<details style="min-height: 30px">
+			<summary class="d-flex align-items-center justify-content-between">
+				View {{post.comment_set.count}} comments
+				<a href="{% url 'post_detail' post.id  %}"
+					><button class="float-end btn text-white spot-bg">
+						Go to Post
+					</button></a
+				>
+			</summary>
 			{% for comment in post.comment_set.all %}
-			<div class="">
+			<div>
 				<hr />
 				<a href="{% url 'profile_detail' comment.author.id %}"
 					><small>{{comment.author.get_full_name}}</small></a

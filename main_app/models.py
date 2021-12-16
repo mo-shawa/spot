@@ -51,7 +51,7 @@ class Dog(models.Model):
 class Post(models.Model):
     creator = models.ForeignKey(Dog, on_delete=models.CASCADE)
     text = models.TextField(max_length=300)
-    image = models.CharField(max_length=200, blank=True)
+    image = models.CharField(max_length=200, blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True)    
          # change the default sort
     class Meta:
@@ -76,7 +76,7 @@ class Comment(models.Model):
 
 
 class Photo(models.Model):
-    url = models.CharField(max_length=200)
+    url = models.CharField(max_length=200, blank=True, null=True)
     dog = models.ForeignKey(Dog, on_delete=models.CASCADE, blank=True)
     profile = models.ForeignKey(Profile, on_delete=models.CASCADE, blank=True)
     post = models.ForeignKey(Post, on_delete=models.CASCADE, blank=True)

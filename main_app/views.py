@@ -16,7 +16,7 @@ from django.urls import reverse_lazy
 S3_BASE_URL = 'https://s3.us-east-2.amazonaws.com/'
 BUCKET = 'hellofren'
 
-class PostList(ListView):
+class PostList(LoginRequiredMixin,ListView):
   model = Post
 
 # class PostDetail(LoginRequiredMixin, DetailView):
@@ -52,7 +52,7 @@ def comment_create(request,post_id):
 
 
 def home(request):
-  return render(request, 'home.html')
+  return redirect('post_list')
 
 def signup(request):
   error_message = ''
@@ -195,7 +195,7 @@ def post_photo(request):
             return url
         except:
             print('An error occurred uploading file to S3')
-  return redirect('profile_detail')
+  # return redirect('profile_detail')
 
 def post_create(request):
   print(request.POST)
