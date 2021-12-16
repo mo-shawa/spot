@@ -129,7 +129,7 @@ class DogCreate(LoginRequiredMixin,CreateView):
         
         
         super().form_valid(form)
-    return redirect('profile_detail')
+    return redirect('profile_detail', profile_id = self.request.user.id)
     
 
 def dog_detail(request, dog_id):

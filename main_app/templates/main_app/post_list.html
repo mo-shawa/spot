@@ -52,13 +52,29 @@
 			"
 		>
 			<a href="{% url 'dog_detail' post.creator.id  %}">
+				{% if post.creator.image %}
+				<img
+					src="{{ post.creator.image }}"
+					class="img-thumbnail spot-bg-25 rounded-circle"
+					style="width: 80px"
+				/>
+				{% else %}
+
+				<img
+					src="https://styles.redditmedia.com/t5_59clj4/styles/communityIcon_3yigconadhw71.png"
+					class="img-thumbnail spot-bg-25 rounded-circle"
+					style="width: 80px"
+				/>
+				{% endif %}
+			</a>
+			<!-- <a href="{% url 'dog_detail' post.creator.id  %}">
 				<img
 					src="https://styles.redditmedia.com/t5_59clj4/styles/communityIcon_3yigconadhw71.png"
 					alt=""
 					class="img-thumbnail spot-bg-25 rounded-circle"
 					style="width: 80px"
 				/>
-			</a>
+			</a> -->
 			<a href="{% url 'dog_detail' post.creator.id  %}">
 				<div class="m-2 d-flex flex-column">
 					<span class="fw-bold">{{ post.creator.name }}</span>
