@@ -86,7 +86,7 @@ def profile_update(request):
   else:
         error_message = 'Invalid Inputs'
 
-  profile_form = ProfileForm()
+  profile_form = ProfileForm(instance=request.user.profile)
   context= {"profile_form": profile_form, 'error_message': error_message}
   
   return render(request, 'main_app/profile_form.html', context)
