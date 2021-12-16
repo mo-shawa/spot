@@ -26,25 +26,22 @@
 		<a class="btn" href="{% url 'profile_update'%}"> Edit Profile </a>
 	</div>
 	{% endif %}
-	<div class="m-3 rounded p-3 shadow" style="min-width: 40vw">
+	<div class="m-3 rounded p-3" style="min-width: 40vw">
 		<h1 class="text-center">Dogs</h1>
-		<div
-			class="d-flex align-items-center justify-content-evenly flex-xl-nowrap"
-		>
+		<div class="d-flex align-items-center justify-content-center flex-wrap">
 			{% for dog in profile.dog_set.all %}
 			<div
 				class="
-					m-1
+					m-2
 					d-flex
 					flex-column
 					align-items-center
-					p-3
-					m-2
+					p-2
 					rounded
 					shadow
 					spot-bg-25
 				"
-				style="max-width: max-content"
+				style="width: 18rem"
 			>
 				{% if dog.image %}
 				<img
@@ -61,13 +58,11 @@
 				/>
 				{% endif %}
 				<h1>{{ dog.name }}</h1>
-				{% if profile.user.id == user.id %}
+				<small class="text-muted">{{ dog.breed }}</small>
+
 				<a href="{% url 'dog_detail' dog.id%}">
-					<button class="btn btn-block m-1 text-white spot-bg">
-						Post as {{dog.name}}
-					</button>
+					<button class="btn btn-block m-1 text-white spot-bg">View Dog</button>
 				</a>
-				{%endif%}
 			</div>
 			{% endfor %}
 		</div>

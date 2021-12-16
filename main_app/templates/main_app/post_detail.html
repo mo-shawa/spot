@@ -21,7 +21,7 @@
 	>
 		<a href="{% url 'dog_detail' post.creator.id  %}">
 			<img
-				src="https://styles.redditmedia.com/t5_59clj4/styles/communityIcon_3yigconadhw71.png"
+				src="{{post.creator.image}}"
 				alt=""
 				class="img-thumbnail spot-bg-25 rounded-circle"
 				style="width: 80px"
@@ -60,7 +60,7 @@
 	</form>
 	{% for comment in post.comment_set.all %}
 	<hr />
-	<a href="/accounts/profile/{{comment.author.id}}/"
+	<a href="{% url 'profile_detail' comment.author.id %}"
 		><small>{{comment.author.get_full_name}}</small></a
 	>
 	<p>{{comment.text}}</p>

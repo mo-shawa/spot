@@ -24,22 +24,32 @@
 		<p>hobbies: {{profile.hobbies}}</p>
 	</div>
 
-	{% if profile.user.id == user.id %}
+	{% if profile.profile.user.id == user.id %}
 	<div class="d-flex justify-content-around">
 		<a href="/dogs/create/">
-			<button class="btn text-white spot-bg">Add Dog</button>
+			<button class="btn text-white spot-bg">Edit Dog</button>
 		</a>
-		<a class="btn" href="{% url 'profile_update'%}"> Edit Profile </a>
+		<a class="btn" href="{% url 'dog_delete' profile.id %}"> Delete Dog </a>
 	</div>
 	{% endif %}
-	<div class="m-3 rounded p-3 shadow " style="min-width: 40vw;">
-		<h1 class=" text-center">Posts</h1>
+	<div class="m-3 rounded p-3 shadow" style="min-width: 40vw">
+		<h1 class="text-center">Posts</h1>
 		<div
-			class="d-flex align-items-center justify-content-evenly flex-xl-nowrap  "
+			class="d-flex align-items-center justify-content-evenly flex-xl-nowrap"
 		>
 			{% for post in profile.post_set.all %}
 			<div
-				class=" m-1 d-flex flex-column align-items-center p-3 m-2 rounded shadow spot-bg-25"
+				class="
+					m-1
+					d-flex
+					flex-column
+					align-items-center
+					p-3
+					m-2
+					rounded
+					shadow
+					spot-bg-25
+				"
 				style="max-width: max-content"
 			>
 				<a href="">
@@ -61,7 +71,6 @@
 			{% endfor %}
 		</div>
 	</div>
-	
 </section>
 
 {%endblock%}
