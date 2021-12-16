@@ -17,11 +17,14 @@
 		{% endif %}
 	</div>
 	<h1 class="my-3">{{profile.name}}</h1>
-	<div>
-		<h3>Profile Bio</h3>
-		<p>bio:{{ profile.bio }}</p>
-		<p>fav snack:{{profile.fav_snack}}</p>
-		<p>hobbies: {{profile.hobbies}}</p>
+	<div class="img-mw">
+		<p>
+			<span class="fw-bold spot-text">Hello Fren!</span> I'm {{profile.name}}! I
+			am an {{profile.age}} year old {{profile.breed}}. My favorite snack is
+			{{profile.fav_snack}} and I enjoy {{profile.hobbies}}!
+		</p>
+		<h5>A little more about me:</h5>
+		<p>{{profile.bio}}</p>
 	</div>
 
 	{% if profile.profile.user.id == user.id %}
@@ -29,7 +32,9 @@
 		<a href="/dogs/create/">
 			<button class="btn text-white spot-bg">Edit Dog</button>
 		</a>
-		<a class="btn" href="{% url 'dog_delete' profile.id %}"> Delete Dog </a>
+		<a class="btn text-danger" href="{% url 'dog_delete' profile.id %}">
+			Delete Dog
+		</a>
 	</div>
 	{% endif %}
 	<div class="m-3 rounded p-3" style="min-width: 40vw">
