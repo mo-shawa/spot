@@ -1,3 +1,4 @@
+from django.http import request
 from django.shortcuts import render, redirect
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.views.generic import ListView, DetailView
@@ -9,6 +10,7 @@ from main_app.forms import ProfileForm, UserForm, CommentForm
 import boto3
 import uuid
 from main_app.models import Comment, Dog, Profile, Photo, Post
+from django.urls import reverse_lazy
 
 
 S3_BASE_URL = 'https://s3.us-east-2.amazonaws.com/'
@@ -106,6 +108,17 @@ class DogCreate(LoginRequiredMixin,CreateView):
     profile = Profile.objects.get(user = self.request.user.id)
     form.instance.profile = profile
     return super().form_valid(form)
+
+def dog_detail(request, dog_id):
+  dog = Dog.objects.get(id=dog_id)
+  return render(request, 'profile.html', {'profile':dog})
+
+class DogDelete(LoginRequiredMixin,DeleteView):
+  model = Dog
+  
+  def get_success_url(self):
+      return reverse_lazy('profile_detail', kwargs={'profile_id': self.request.user.id})
+
 
 def profile_photo(request):
   photo_file = request.FILES.get("photo-file", None)

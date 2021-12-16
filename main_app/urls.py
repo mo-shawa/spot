@@ -11,6 +11,9 @@ urlpatterns = [
     path('accounts/profile/profile-photo/', views.profile_photo, name="profile_photo"),
     # DOG PATHS
     path('dogs/create/',views.DogCreate.as_view(), name='dog_create'),
+    path('dogs/<int:dog_id>',views.dog_detail, name='dog_detail'),
+    path('dogs/<int:pk>/delete', views.DogDelete.as_view(),name='dog_delete'),
+
     # POST PATHS
     path('posts/', views.PostList.as_view(), name='post_list'),
     path('posts/create', views.post_create, name='post_create'),

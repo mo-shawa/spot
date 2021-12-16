@@ -43,9 +43,11 @@
 				/>
 				<h1>{{ dog.name }}</h1>
 				{% if profile.user.id == user.id %}
-				<button class="btn btn-block m-1 btn-primary">
-					Post as {{dog.name}}
-				</button>
+				<a href="{% url 'dog_detail' dog.id%}">
+					<button class="btn btn-block m-1 btn-primary">
+						Post as {{dog.name}}
+					</button>
+				</a>
 				{%endif%}
 			</div>
 			{% endfor %}
