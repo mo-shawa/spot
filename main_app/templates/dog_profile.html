@@ -11,12 +11,18 @@
 		/>
 		{% else %}
 		<img
-			src="https://cdn.business2community.com/wp-content/uploads/2017/08/blank-profile-picture-973460_640.png"
+			src="https://styles.redditmedia.com/t5_59clj4/styles/communityIcon_3yigconadhw71.png"
 			class="rounded-circle mw-50 mh-50 py-3 my-3 w-100 p-3"
 		/>
 		{% endif %}
 	</div>
-	<h1 class="my-3">{{profile.user.get_full_name}}</h1>
+	<h1 class="my-3">{{profile.name}}</h1>
+	<div>
+		<h3>Profile Bio</h3>
+		<p>bio:{{ profile.bio }}</p>
+		<p>fav snack:{{profile.fav_snack}}</p>
+		<p>hobbies: {{profile.hobbies}}</p>
+	</div>
 
 	{% if profile.user.id == user.id %}
 	<div class="d-flex justify-content-around">
@@ -27,25 +33,25 @@
 	</div>
 	{% endif %}
 	<div class="m-3 rounded p-3 shadow " style="min-width: 40vw;">
-		<h1 class=" text-center">Dogs</h1>
+		<h1 class=" text-center">Posts</h1>
 		<div
 			class="d-flex align-items-center justify-content-evenly flex-xl-nowrap  "
 		>
-			{% for dog in profile.dog_set.all %}
+			{% for post in profile.post_set.all %}
 			<div
 				class=" m-1 d-flex flex-column align-items-center p-3 m-2 rounded shadow spot-bg-25"
 				style="max-width: max-content"
 			>
-				<a href="{% url 'dog_detail' dog.id%}">
+				<a href="">
 					<img
 						src="https://styles.redditmedia.com/t5_59clj4/styles/communityIcon_3yigconadhw71.png"
 						class="rounded-circle m-3 shadow"
 						style="width: 100px"
 					/>
 				</a>
-				<h1>{{ dog.name }}</h1>
+				<h1>{{ post.text }}</h1>
 				{% if profile.user.id == user.id %}
-				<a href="{% url 'dog_detail' dog.id%}">
+				<a href="">
 					<button class="btn btn-block m-1 text-white spot-bg">
 						Post as {{dog.name}}
 					</button>
@@ -55,10 +61,7 @@
 			{% endfor %}
 		</div>
 	</div>
-	<div>
-		<h3>Profile Bio</h3>
-		<p>{{ profile.bio }}</p>
-	</div>
+	
 </section>
 
 {%endblock%}

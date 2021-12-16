@@ -111,7 +111,7 @@ class DogCreate(LoginRequiredMixin,CreateView):
 
 def dog_detail(request, dog_id):
   dog = Dog.objects.get(id=dog_id)
-  return render(request, 'profile.html', {'profile':dog})
+  return render(request, 'dog_profile.html', {'profile':dog})
 
 class DogDelete(LoginRequiredMixin,DeleteView):
   model = Dog
