@@ -1,17 +1,47 @@
 {% extends 'base.html' %} {% block content %}
-<h1 class="text-center p-3 display-1 spot-text">Post Details</h1>
-<div>
-	<img src="{{post.image}}" class="img-fluid" alt="" />
-	<h3>{{post.creator.name}}</h3>
-	<h3>{{post.creator.profile.user.id}}</h3>
-	<p>{{post.text}}</p>
+<h1 class="text-center p-3 display-1 spot-text">
+	{{post.creator.name}}'s Post
+</h1>
+<div class="d-flex flex-column">
+	<div class="img-mw mx-auto">
+		<img src="{{post.image}}" class="img-fluid rounded" alt="" />
+	</div>
+
+	<div
+		class="
+			border-bottom
+			pb-3
+			mb-3
+			w-100
+			d-flex
+			flex-row
+			align-items-center
+			justify-content-start
+		"
+	>
+		<img
+			src="https://styles.redditmedia.com/t5_59clj4/styles/communityIcon_3yigconadhw71.png"
+			alt=""
+			class="img-thumbnail spot-bg-25 rounded-circle"
+			style="width: 80px"
+		/>
+		<a href="{% url 'post_detail' post.id  %}">
+			<div class="m-2 d-flex flex-column">
+				<span class="fw-bold">{{ post.creator.name }}</span>
+				<a href="{% url 'profile_detail' post.creator.profile.id %}"
+					><small>{{ post.creator.profile }} - {{post.created_at}}</small></a
+				>
+			</div>
+		</a>
+	</div>
+	<p class="my-3">{{post.text}}</p>
 	{% if post.creator.profile.user.id == user.id %}
 	<div>
 		<a href="{% url 'post_update' post.id %}"
-			><button class="btn shadow">Edit post</button></a
+			><button class="btn text-white spot-bg shadow">Edit post</button></a
 		>
 		<a href="{% url 'post_delete' post.id %}"
-			><button class="btn btn-danger">Delete post</button></a
+			><button class="btn text-danger">Delete post</button></a
 		>
 	</div>
 	{%endif%}
@@ -24,7 +54,7 @@
 		method="POST"
 	>
 		{%csrf_token%} {{form.text}}
-		<button class="btn btn-primary mx-2" type="submit">Add Comment</button>
+		<button class="btn spot-text mx-2" type="submit">Add Comment</button>
 	</form>
 	{% for comment in post.comment_set.all %}
 	<hr />

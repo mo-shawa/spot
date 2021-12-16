@@ -43,3 +43,27 @@ body {
 body > .container {
 	background: white;
 }
+
+.img-mw {
+	max-width: 600px;
+}
+
+.mw-60 {
+	max-width: 60rem;
+}
+
+.img-crop {
+	width: 100%;
+	max-width: 400px;
+	height: 400px;
+	position: relative;
+	overflow: hidden;
+	border-radius: 50%;
+}
+
+.img-crop > img {
+	display: inline;
+	margin: 0 auto;
+	height: 100%;
+	width: auto;
+}
