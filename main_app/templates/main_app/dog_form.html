@@ -6,8 +6,13 @@
 <p class="red-text">{{ error_message }}</p>
 {% endif %}
 
-<form method="POST" action="{% url 'dog_create' %}">
-	{% csrf_token %} {{ form|crispy }}
+<form method="POST" enctype="multipart/form-data" action="{% url 'dog_create' %}">
+	{% csrf_token %} 
+	<label for="id_image" class="control-label requiredField">
+		Profile Photo:</label>
+	<div class="controls"> <input type="file" name="photo-file" />
+	</div>
+	{{ form|crispy }}
 	<input type="submit" class="btn btn-success" value="Add Dog" />
 </form>
 {%endblock%}

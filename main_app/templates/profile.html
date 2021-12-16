@@ -26,23 +26,40 @@
 		<a class="btn" href="{% url 'profile_update'%}"> Edit Profile </a>
 	</div>
 	{% endif %}
-	<div class="m-3 rounded p-3 shadow " style="min-width: 40vw;">
-		<h1 class=" text-center">Dogs</h1>
+	<div class="m-3 rounded p-3 shadow" style="min-width: 40vw">
+		<h1 class="text-center">Dogs</h1>
 		<div
-			class="d-flex align-items-center justify-content-evenly flex-xl-nowrap  "
+			class="d-flex align-items-center justify-content-evenly flex-xl-nowrap"
 		>
 			{% for dog in profile.dog_set.all %}
 			<div
-				class=" m-1 d-flex flex-column align-items-center p-3 m-2 rounded shadow spot-bg-25"
+				class="
+					m-1
+					d-flex
+					flex-column
+					align-items-center
+					p-3
+					m-2
+					rounded
+					shadow
+					spot-bg-25
+				"
 				style="max-width: max-content"
 			>
-				<a href="{% url 'dog_detail' dog.id%}">
-					<img
-						src="https://styles.redditmedia.com/t5_59clj4/styles/communityIcon_3yigconadhw71.png"
-						class="rounded-circle m-3 shadow"
-						style="width: 100px"
-					/>
-				</a>
+				{% if dog.image %}
+				<img
+					src="{{ dog.image }}"
+					class="rounded-circle m-3 shadow"
+					style="width: 100px"
+				/>
+				{% else %}
+
+				<img
+					src="https://styles.redditmedia.com/t5_59clj4/styles/communityIcon_3yigconadhw71.png"
+					class="rounded-circle m-3 shadow"
+					style="width: 100px"
+				/>
+				{% endif %}
 				<h1>{{ dog.name }}</h1>
 				{% if profile.user.id == user.id %}
 				<a href="{% url 'dog_detail' dog.id%}">

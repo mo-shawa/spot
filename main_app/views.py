@@ -107,7 +107,30 @@ class DogCreate(LoginRequiredMixin,CreateView):
   def form_valid(self,form):
     profile = Profile.objects.get(user = self.request.user.id)
     form.instance.profile = profile
-    return super().form_valid(form)
+    print("self.request.POST",self.request.POST)
+    photo_file = self.request.FILES.get("photo-file", None)
+    print(photo_file)
+    if photo_file:
+    
+       
+        s3 = boto3.client('s3')
+        key = uuid.uuid4().hex[:6] + photo_file.name[photo_file.name.rfind('.'):]
+       
+        try:
+            s3.upload_fileobj(photo_file, BUCKET, key)
+            # build the full url string
+            url = f"{S3_BASE_URL}{BUCKET}/{key}"
+            form.instance.image = url
+            print("hello",self.request.POST)
+        except Exception as e:
+
+            print('An error occurred uploading file to S3: ',e)
+        
+        
+        
+        super().form_valid(form)
+    return redirect('profile_detail')
+    
 
 def dog_detail(request, dog_id):
   dog = Dog.objects.get(id=dog_id)
