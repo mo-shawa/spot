@@ -1,7 +1,7 @@
 {% extends 'base.html' %} {% block content %}
-<h1>POST DETAIL</h1>
+<h1 class="text-center p-3 display-1 spot-text">Post Details</h1>
 <div>
-	<img src="{{post.image}}" alt="" />
+	<img src="{{post.image}}" class="img-fluid" alt="" />
 	<h3>{{post.creator.name}}</h3>
 	<h3>{{post.creator.profile.user.id}}</h3>
 	<p>{{post.text}}</p>
