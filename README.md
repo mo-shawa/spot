@@ -11,7 +11,7 @@ The application is in an early stage of development, and there are many features
 
 ## :camera: Screenshots
 
-![Alt text](![image](https://user-images.githubusercontent.com/86521165/146490972-63374bf1-e0b9-4351-a3cc-1e611af61e0b.png))
+![Alt text](https://i.gyazo.com/bb453f2f2ebe3b6a5bd85e4809f67156.png)
 Main view of app
 ---
 ![Alt text](https://github.com/mattl999/BettrMe/blob/main/public/images/BettrMe%20Screenshots/BettrMe%20Create%20Modal.png?raw=true)
