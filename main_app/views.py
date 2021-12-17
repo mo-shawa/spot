@@ -22,6 +22,7 @@ class PostList(LoginRequiredMixin,ListView):
 # class PostDetail(LoginRequiredMixin, DetailView):
 #   model = Post
 
+@login_required
 def post_detail(request, post_id):
   post = Post.objects.get(id=post_id)
   comment_form = CommentForm
@@ -73,6 +74,7 @@ class ProfileCreate(LoginRequiredMixin, CreateView):
   model = Profile
   fields = "__all__"
 
+@login_required
 def profile_update(request):
   error_message = ''
   
@@ -95,6 +97,7 @@ def profile_update(request):
 # class ProfileView(DetailView):
 #   model = Profile
 
+@login_required
 def profile_detail(request, profile_id):
   profile = Profile.objects.get(id = profile_id)
   return render(request, 'profile.html', {'profile':profile})
@@ -131,6 +134,7 @@ class DogCreate(LoginRequiredMixin,CreateView):
         super().form_valid(form)
     return redirect('profile_detail', profile_id = self.request.user.id)
 
+@login_required
 def dog_update(request, dog_id):
   error_message = ''
   
@@ -149,7 +153,7 @@ def dog_update(request, dog_id):
   
   return render(request, 'main_app/dog_form.html', context)
      
-
+@login_required
 def dog_detail(request, dog_id):
   dog = Dog.objects.get(id=dog_id)
   return render(request, 'dog_profile.html', {'profile':dog})
@@ -160,7 +164,7 @@ class DogDelete(LoginRequiredMixin,DeleteView):
   def get_success_url(self):
       return reverse_lazy('profile_detail', kwargs={'profile_id': self.request.user.id})
 
-
+@login_required
 def profile_photo(request):
   photo_file = request.FILES.get("photo-file", None)
   print("photofunc")
@@ -191,6 +195,7 @@ def profile_photo(request):
             print('An error occurred uploading file to S3')
   return redirect('profile_detail', profile_id= request.user.profile.id)
 
+@login_required
 def post_photo(request):
   photo_file = request.FILES.get("photo-file", None)
   print("in post photo function: ",request.POST)
@@ -215,6 +220,7 @@ def post_photo(request):
             print('An error occurred uploading file to S3')
   # return redirect('profile_detail')
 
+@login_required
 def post_create(request):
   print(request.POST)
   
