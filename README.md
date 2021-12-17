@@ -14,7 +14,7 @@ The application is in an early stage of development, and there are many features
 ![Alt text](https://i.gyazo.com/9c73436ed28c8d281c5651ae2074d0b9.png)
 Main feed of app
 ---
-![Alt text](https://github.com/mattl999/BettrMe/blob/main/public/images/BettrMe%20Screenshots/BettrMe%20Create%20Modal.png?raw=true)
+![Alt text](https://i.gyazo.com/e1dfc81705c4fba65033487d5a916d9a.png)
 User Profile Page
 ---
 ![Alt text](https://i.gyazo.com/b0dca7a3d8d6d853bad0ed7f1ef49d9b.png)
