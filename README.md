@@ -11,18 +11,19 @@ The application is in an early stage of development, and there are many features
 
 ## :camera: Screenshots
 
-![Alt text](https://i.gyazo.com/bb453f2f2ebe3b6a5bd85e4809f67156.png)
-Main view of app
+![Alt text](https://i.gyazo.com/9c73436ed28c8d281c5651ae2074d0b9.png)
+Main feed of app
 ---
 ![Alt text](https://github.com/mattl999/BettrMe/blob/main/public/images/BettrMe%20Screenshots/BettrMe%20Create%20Modal.png?raw=true)
-Add a new goal
+User Profile Page
 ---
-![Alt text](https://github.com/mattl999/BettrMe/blob/main/public/images/BettrMe%20Screenshots/BettrMe%20Edit%20Modal.png?raw=true)
-Edit your Goals
+![Alt text](https://i.gyazo.com/b0dca7a3d8d6d853bad0ed7f1ef49d9b.png)
+Dog Profile Page
 ---
-![Alt text](https://github.com/mattl999/BettrMe/blob/main/public/images/BettrMe%20Screenshots/BettrMe%20Tomorrow.png?raw=true)
-View Tomorrow or Yesterday
+![Alt text](https://i.gyazo.com/be2925bf21f2a1b4834f6790c72edf4d.png)
+Post Detail Page
 ---
+
 ## :computer: Technologies Used 
 
 - Python
