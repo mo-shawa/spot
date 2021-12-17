@@ -1,11 +1,13 @@
 {% extends 'base.html' %} {% block content %}
-<h1>But <span class="spot-text">{{dog.name}}</span> is such a good boi :(</h1>
+<div class="w-100 h-100 d-flex flex-column pt-3 align-items-center">
+	<h1>But <span class="spot-text">{{dog.name}}</span> is such a good boi :(</h1>
 
-<form action="" method="post">
-	{%csrf_token%}
-	<button class="btn btn-danger" type="submit">I'm sure</button>
-	<a href="{% url 'profile_detail' user.id %}"
-		><button class="btn btn-success">Nevermind</button></a
-	>
-</form>
+	<form action="" method="post">
+		{%csrf_token%}
+		<button class="btn btn-danger" type="submit">I'm sure</button>
+		<a href="{% url 'profile_detail' user.id %}"
+			><button class="btn btn-success">Nevermind</button></a
+		>
+	</form>
+</div>
 {%endblock%}

@@ -1,23 +1,27 @@
 {% extends 'base.html' %} {% block content %} {% load crispy_forms_tags %}
 
-<h1>Update Profile</h1>
+<div class="w-100 h-100 d-flex flex-column pt-3 align-items-center">
+	<h1>Update Profile</h1>
 
-<!-- Leaving the action empty makes the form post to the same url used to display it -->
+	<!-- Leaving the action empty makes the form post to the same url used to display it -->
 
-<form
-	action="{% url 'profile_update' %}"
-	enctype="multipart/form-data"
-	class="card-panel"
-	method="post"
->
-	<!-- Django requires the following for security purposes -->
-	{% csrf_token %}
-	<div class="form-group">
-		<label class="form" for="photo-file">Upload Profile Photo</label>
-		<input class="form-control" type="file" name="photo-file" />
-	</div>
-	{{ profile_form|crispy}}
+	<form
+		action="{% url 'profile_update' %}"
+		enctype="multipart/form-data"
+		class="card-panel"
+		method="post"
+	>
+		<!-- Django requires the following for security purposes -->
+		{% csrf_token %}
+		<div class="form-group">
+			<label class="form" for="photo-file">Upload Profile Photo</label>
+			<input class="form-control" type="file" name="photo-file" />
+		</div>
+		{{ profile_form|crispy}}
 
-	<button type="submit" class="btn">Submit!</button>
-</form>
+		<button type="submit" class="mt-2 btn text-white w-100 spot-bg">
+			Submit!
+		</button>
+	</form>
+</div>
 {% endblock %}
