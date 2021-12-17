@@ -20,12 +20,14 @@
 		"
 	>
 		<a href="{% url 'dog_detail' post.creator.id  %}">
-			<img
-				src="{{post.creator.image}}"
-				alt=""
-				class="img-thumbnail spot-bg-25 rounded-circle"
-				style="width: 80px"
-			/>
+			<div class="img-crop-s shadow">
+				<img
+					src="{{post.creator.image}}"
+					alt=""
+					class="img-thumbnail spot-bg-25 rounded-circle"
+					style="width: 80px"
+				/>
+			</div>
 		</a>
 		<a href="{% url 'dog_detail' post.creator.id  %}">
 			<div class="m-2 d-flex flex-column">
@@ -48,7 +50,7 @@
 	</div>
 	{%endif%}
 </div>
-<div class="p-3 shadow">
+<div class="p-3 shadow rounded">
 	<h5>Comments</h5>
 	<form
 		class="d-flex align-items-center justify-content-start"

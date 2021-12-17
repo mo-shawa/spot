@@ -66,11 +66,13 @@
 			"
 		>
 			<a href="{% url 'dog_detail' post.creator.id  %}">
-				<img
-					src="{{ post.creator.image }}"
-					class="img-thumbnail spot-bg-25 rounded-circle"
-					style="width: 80px"
-				/>
+				<div class="img-crop-s">
+					<img
+						src="{{ post.creator.image }}"
+						class="img-thumbnail spot-bg-25 rounded-circle"
+						style="width: 80px"
+					/>
+				</div>
 			</a>
 
 			<a href="{% url 'dog_detail' post.creator.id  %}">

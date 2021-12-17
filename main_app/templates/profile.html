@@ -41,15 +41,18 @@
 					rounded
 					shadow
 					spot-bg-25
+					border
 				"
 				style="width: 18rem"
 			>
 				{% if dog.image %}
-				<img
-					src="{{ dog.image }}"
-					class="rounded-circle m-3 shadow"
-					style="width: 100px"
-				/>
+				<div class="img-crop-s shadow">
+					<img
+						src="{{ dog.image }}"
+						class="img-thumbnail spot-bg-25 rounded-circle"
+						style="width: 80px"
+					/>
+				</div>
 				{% else %}
 
 				<img

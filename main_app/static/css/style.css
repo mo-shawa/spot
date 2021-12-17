@@ -61,7 +61,17 @@ body > .container {
 	border-radius: 50%;
 }
 
-.img-crop > img {
+.img-crop-s {
+	width: 100%;
+	max-width: 80px;
+	height: 80px;
+	position: relative;
+	overflow: hidden;
+	border-radius: 50%;
+}
+
+.img-crop > img,
+.img-crop-s > img {
 	display: inline;
 	margin: 0 auto;
 	height: 100%;
