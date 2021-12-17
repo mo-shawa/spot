@@ -25,3 +25,8 @@ class CommentForm(ModelForm):
         widgets = {
           'text': forms.Textarea(attrs={'rows':2}),
         }
+
+class DogForm(ModelForm):
+    class Meta:
+        model: Dog
+        fields = ['name']

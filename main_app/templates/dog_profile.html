@@ -29,7 +29,7 @@
 
 	{% if profile.profile.user.id == user.id %}
 	<div class="d-flex justify-content-around">
-		<a href="/dogs/create/">
+		<a href="{% url 'dog_update' profile.id %}">
 			<button class="btn text-white spot-bg">Edit Dog</button>
 		</a>
 		<a class="btn text-danger" href="{% url 'dog_delete' profile.id %}">

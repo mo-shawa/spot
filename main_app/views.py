@@ -6,7 +6,7 @@ from django.contrib.auth import login
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
-from main_app.forms import ProfileForm, UserForm, CommentForm
+from main_app.forms import ProfileForm, UserForm, CommentForm, DogForm
 import boto3
 import uuid
 from main_app.models import Comment, Dog, Profile, Photo, Post
@@ -130,7 +130,25 @@ class DogCreate(LoginRequiredMixin,CreateView):
         
         super().form_valid(form)
     return redirect('profile_detail', profile_id = self.request.user.id)
-    
+
+def dog_update(request, dog_id):
+  error_message = ''
+  
+  if request.method == 'POST':
+     dog_form = DogForm(request.POST, instance=Dog.objects.get(id=dog_id))
+     if dog_form.is_valid():
+       dog_form.save()
+       
+       return redirect('dog_detail', dog_id = dog_id)
+
+  else:
+        error_message = 'Invalid Inputs'
+  dog = Dog.objects.get(id=dog_id)
+  dog_form = DogForm(instance=Dog.objects.get(id=dog_id))
+  context= {"form": dog_form, 'error_message': error_message}
+  
+  return render(request, 'main_app/dog_form.html', context)
+     
 
 def dog_detail(request, dog_id):
   dog = Dog.objects.get(id=dog_id)

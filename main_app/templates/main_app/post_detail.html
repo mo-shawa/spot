@@ -11,7 +11,7 @@
 		class="
 			border-bottom
 			pb-3
-			mb-3
+			my-3
 			w-100
 			d-flex
 			flex-row
@@ -33,7 +33,10 @@
 			<div class="m-2 d-flex flex-column">
 				<span class="fw-bold">{{ post.creator.name }}</span>
 				<a href="{% url 'profile_detail' post.creator.profile.id %}"
-					><small>{{ post.creator.profile }} - {{post.created_at}}</small></a
+					><small
+						>{{ post.creator.profile }}
+						<span class="text-muted">- {{post.created_at}}</span></small
+					></a
 				>
 			</div>
 		</a>
@@ -72,7 +75,6 @@
 <script>
 	function calcHeight(value) {
 		let numberOfLineBreaks = (value.match(/\n/g) || []).length;
-		// min-height + lines x line-height + padding + border
 		let newHeight = 20 + numberOfLineBreaks * 20 + 12 + 2;
 		return newHeight;
 	}
