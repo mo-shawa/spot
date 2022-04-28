@@ -1,8 +1,38 @@
+.hero {
+	background: linear-gradient(137.42deg, #00d5ff0c 0%, #d026700d 40%, #b9b6000a 100%) !important;
+}
+
+body {
+	position: relative;
+}
+
+.slide {
+	position: absolute;
+	bottom: 0;
+	opacity: 0;
+	animation: in 5s ease-in-out forwards;
+	animation-delay: 3s;
+
+}
+
+@keyframes in {
+	from {
+		margin-bottom: -40%;
+		opacity: 0;
+	}
+
+	to {
+		margin-bottom: 0;
+		opacity: 1;
+	}
+}
+
 a {
 	text-decoration: none;
 	color: #5479fa;
 	transition: color 200ms ease-in-out;
 }
+
 a:hover {
 	color: #2f4288;
 }
@@ -10,6 +40,7 @@ a:hover {
 .spot-text {
 	color: #5479fa;
 }
+
 .spot-text::after {
 	content: "";
 	height: 10px;
@@ -18,12 +49,15 @@ a:hover {
 	left: 0;
 	bottom: 0;
 }
+
 .spot-bg {
 	background-color: #5479fa;
 }
+
 .spot-bg-50 {
 	background-color: rgba(84, 120, 250, 0.5);
 }
+
 .spot-bg-25 {
 	background-color: rgba(84, 120, 250, 0.25);
 }
@@ -40,7 +74,7 @@ body {
 	background: rgba(84, 120, 250, 0.1);
 }
 
-body > .container {
+body>.container {
 	background: white;
 }
 
@@ -70,10 +104,15 @@ body > .container {
 	border-radius: 50%;
 }
 
-.img-crop > img,
-.img-crop-s > img {
+.img-crop>img,
+.img-crop-s>img {
 	display: inline;
 	margin: 0 auto;
 	height: 100%;
 	width: auto;
+}
+
+.borders {
+	border: 5px solid red !important;
+	/* box-shadow: #5479fa 0px 0px 10px !important; */
 }
