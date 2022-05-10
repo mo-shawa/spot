@@ -17,14 +17,14 @@ S3_BASE_URL = 'https://s3.us-east-2.amazonaws.com/'
 BUCKET = 'hellofren'
 
 
-class PostList(LoginRequiredMixin, ListView):
+class PostList(ListView):
     model = Post
 
 # class PostDetail(LoginRequiredMixin, DetailView):
 #   model = Post
 
 
-@login_required
+# @login_required
 def post_detail(request, post_id):
     post = Post.objects.get(id=post_id)
     comment_form = CommentForm
